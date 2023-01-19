@@ -15,8 +15,10 @@ class ProjectGrid extends StatelessWidget {
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: loadedProducts.length,
-      itemBuilder: (contex, index) =>
-          ProductItem(product: loadedProducts[index]),
+      itemBuilder: (contex, index) => ChangeNotifierProvider(
+        create: (contex) => loadedProducts[index],
+        child: ProductItem(),
+      ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 3 / 2,
