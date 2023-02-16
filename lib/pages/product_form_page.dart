@@ -38,6 +38,11 @@ class _ProductFormPageState extends State<ProductFormPage> {
   }
 
   void _submitForm() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
+    }
     _formKey.currentState?.save();
     final newProduct = Product(
       id: Random().nextDouble().toString(),
@@ -73,6 +78,13 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     FocusScope.of(context).requestFocus(_priceFocus);
                   }),
                   onSaved: (name) => _formData['name'] = name ?? '',
+                  validator: (_value) {
+                    final value = _value ?? "";
+                    if (value.trim().isEmpty) {
+                      return "O Nome é um campo obrigatório.";
+                    }
+                    return null;
+                  },
                 ),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Preço'),
