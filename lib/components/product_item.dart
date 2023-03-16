@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../models/product.dart';
+import 'package:shop/models/product.dart';
+import 'package:shop/utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
 
-  const ProductItem(this.product, {super.key});
+  const ProductItem(
+    this.product, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +16,25 @@ class ProductItem extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(product.imageUrl),
       ),
-      title: const Text('Produto'),
-      trailing: Container(
+      title: Text(product.name),
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: [
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.edit),
-              color: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.edit),
+              color: Theme.of(context).colorScheme.primary,
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  AppRoutes.productsForm,
+                  arguments: product,
+                );
+              },
             ),
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
+              onPressed: () {},
             ),
           ],
         ),
