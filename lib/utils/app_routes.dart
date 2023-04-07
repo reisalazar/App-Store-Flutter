@@ -1,4 +1,4 @@
-import 'package:shop/models/oder.dart';
+import 'package:shop/models/order.dart';
 
 class AppRoutes {
   static const productDetail = '/product-detail';
